@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Users Details </h1>
+
+<table id="customers">
+  <tr>
+    <th>Name </th>
+    <th>Email </th>
+    <th>Age</th>
+    <th>City</th>
+    <th>Profession</th>
+    <th>Select</th>
+    <th>Delete</th>
+  </tr>
+
+  <% users.forEach( user =>{ %>
+    <% if (user.isPromoted) { %>
+      <tr class="isPromoted">
+        <td><%= user.full_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.age %></td>
+        <td><%= user.city %></td>
+        <td><%= user.profession %></td>
+        <td>
+          <form action="/user/<%= user._id %>?_method=PUT" method="post">
+            <button id="edit-<%= user.name %>" type="submit">Select</button>
+          </form>
+        </td>
+        <td>
+          <form action="/user/<%= user._id %>?_method=DELETE" method="post">
+            <button id="delete-<%= user.name %>">Delete</button>
+          </form>
+        </td>
+    </tr>
+    <% } else { %>
+      <tr>
+        <td><%= user.full_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.age %></td>
+        <td><%= user.city %></td>
+        <td><%= user.profession %></td>
+        <td>
+          <form action="/user/<%= user._id %>?_method=PUT" method="post">
+            <button id="edit-<%= user.name %>" type="submit">Select</button>
+          </form>
+        </td>
+        <td>
+          <form action="/user/<%= user._id %>?_method=DELETE" method="post">
+            <button id="delete-<%= user.name %>" >Delete</button>
+          </form>
+        </td>
+    </tr>
+    <% }%>
+
+  <% }) %>
+
+</table>
+
+<br>
+
+<a href="/form">Add a new User</a>
+
+</body>
+</html>
